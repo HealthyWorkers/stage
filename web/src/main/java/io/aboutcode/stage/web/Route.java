@@ -1,7 +1,7 @@
-package io.aboutcode.stage.web.web;
+package io.aboutcode.stage.web;
 
-import io.aboutcode.stage.web.web.request.RequestHandler;
-import io.aboutcode.stage.web.web.request.RequestType;
+import io.aboutcode.stage.web.request.RequestHandler;
+import io.aboutcode.stage.web.request.RequestType;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

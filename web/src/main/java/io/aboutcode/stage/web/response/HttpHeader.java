@@ -1,4 +1,4 @@
-package io.aboutcode.stage.web.web.response;
+package io.aboutcode.stage.web.response;
 
 /**
  * All commonly used HTTP headers.

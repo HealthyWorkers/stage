@@ -1,9 +1,9 @@
-package io.aboutcode.stage.web.web.response.renderer;
+package io.aboutcode.stage.web.response.renderer;
 
 import com.google.common.net.MediaType;
-import io.aboutcode.stage.web.web.request.Request;
-import io.aboutcode.stage.web.web.response.HttpHeader;
-import io.aboutcode.stage.web.web.response.Response;
+import io.aboutcode.stage.web.request.Request;
+import io.aboutcode.stage.web.response.HttpHeader;
+import io.aboutcode.stage.web.response.Response;
 
 /**
  * Renders the responses body using {@link Object#toString()}, setting the header to

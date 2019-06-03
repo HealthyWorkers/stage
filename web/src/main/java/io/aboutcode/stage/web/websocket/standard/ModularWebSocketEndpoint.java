@@ -5,7 +5,7 @@ import io.aboutcode.stage.dependency.DependencyContext;
 import io.aboutcode.stage.dependency.DependencyException;
 import io.aboutcode.stage.subscription.SubscriptionManager;
 import io.aboutcode.stage.util.Tuple2;
-import io.aboutcode.stage.web.web.WebEndpoint;
+import io.aboutcode.stage.web.WebEndpoint;
 import io.aboutcode.stage.web.websocket.DelegatingWebSocketHandler;
 import io.aboutcode.stage.web.websocket.WebSocketHandler;
 import io.aboutcode.stage.web.websocket.WebSocketIo;

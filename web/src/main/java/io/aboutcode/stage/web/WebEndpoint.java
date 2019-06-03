@@ -1,4 +1,4 @@
-package io.aboutcode.stage.web.web;
+package io.aboutcode.stage.web;
 
 import io.aboutcode.stage.web.websocket.WebSocketRoute;
 import java.util.Collections;

@@ -4,7 +4,7 @@ import io.aboutcode.stage.application.ApplicationAssemblyContext;
 import io.aboutcode.stage.component.ComponentBundle;
 import io.aboutcode.stage.component.ComponentContainer;
 import io.aboutcode.stage.configuration.ApplicationConfigurationContext;
-import io.aboutcode.stage.web.web.response.renderer.ResponseRenderer;
+import io.aboutcode.stage.web.response.renderer.ResponseRenderer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

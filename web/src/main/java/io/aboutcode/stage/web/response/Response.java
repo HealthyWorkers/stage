@@ -1,7 +1,7 @@
-package io.aboutcode.stage.web.web.response;
+package io.aboutcode.stage.web.response;
 
-import io.aboutcode.stage.web.web.request.Request;
-import io.aboutcode.stage.web.web.request.RequestHandler;
+import io.aboutcode.stage.web.request.Request;
+import io.aboutcode.stage.web.request.RequestHandler;
 import java.util.Map;
 
 /**

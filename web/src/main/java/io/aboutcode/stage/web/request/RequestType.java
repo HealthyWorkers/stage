@@ -1,4 +1,4 @@
-package io.aboutcode.stage.web.web.request;
+package io.aboutcode.stage.web.request;
 
 /**
  * The possible types of {@link Request}

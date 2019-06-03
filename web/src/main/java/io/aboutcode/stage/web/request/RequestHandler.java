@@ -1,6 +1,6 @@
-package io.aboutcode.stage.web.web.request;
+package io.aboutcode.stage.web.request;
 
-import io.aboutcode.stage.web.web.response.Response;
+import io.aboutcode.stage.web.response.Response;
 
 /**
  * A handler for a request. Since request handlers can be chained, it is not guaranteed that an

@@ -1,7 +1,7 @@
-package io.aboutcode.stage.web.web.response.renderer;
+package io.aboutcode.stage.web.response.renderer;
 
-import io.aboutcode.stage.web.web.request.Request;
-import io.aboutcode.stage.web.web.response.Response;
+import io.aboutcode.stage.web.request.Request;
+import io.aboutcode.stage.web.response.Response;
 
 /**
  * Implementations of this are used internally by the web framework to render responses to the

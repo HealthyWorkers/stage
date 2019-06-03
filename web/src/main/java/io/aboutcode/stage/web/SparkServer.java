@@ -2,14 +2,11 @@ package io.aboutcode.stage.web;
 
 import com.google.common.base.CharMatcher;
 import io.aboutcode.stage.dispatch.Dispatcher;
-import io.aboutcode.stage.web.web.Route;
-import io.aboutcode.stage.web.web.Session;
-import io.aboutcode.stage.web.web.WebEndpoint;
-import io.aboutcode.stage.web.web.request.RequestHandler;
-import io.aboutcode.stage.web.web.request.RequestType;
-import io.aboutcode.stage.web.web.response.InternalServerError;
-import io.aboutcode.stage.web.web.response.Ok;
-import io.aboutcode.stage.web.web.response.renderer.ResponseRenderer;
+import io.aboutcode.stage.web.request.RequestHandler;
+import io.aboutcode.stage.web.request.RequestType;
+import io.aboutcode.stage.web.response.InternalServerError;
+import io.aboutcode.stage.web.response.Ok;
+import io.aboutcode.stage.web.response.renderer.ResponseRenderer;
 import io.aboutcode.stage.web.websocket.DelegatingWebSocketHandler;
 import java.util.Collection;
 import java.util.Comparator;
@@ -79,23 +76,23 @@ final class SparkServer {
       this.responseRenderer = responseRenderer;
    }
 
-   private static io.aboutcode.stage.web.web.request.Request request(Request rawRequest) {
+   private static io.aboutcode.stage.web.request.Request request(Request rawRequest) {
       return new DefaultRequest(rawRequest);
    }
 
-   private static io.aboutcode.stage.web.web.response.Response getCurrentResponse(
-       io.aboutcode.stage.web.web.request.Request request) {
-      return (io.aboutcode.stage.web.web.response.Response) request
+   private static io.aboutcode.stage.web.response.Response getCurrentResponse(
+       io.aboutcode.stage.web.request.Request request) {
+      return (io.aboutcode.stage.web.response.Response) request
           .attribute(KEY_RESPONSE)
           .orElse(Ok.create());
    }
 
-   private static io.aboutcode.stage.web.web.response.Response process(
-       io.aboutcode.stage.web.web.request.Request request,
+   private static io.aboutcode.stage.web.response.Response process(
+       io.aboutcode.stage.web.request.Request request,
        RequestHandler requestHandler) {
-      io.aboutcode.stage.web.web.response.Response currentResponse = getCurrentResponse(request);
+      io.aboutcode.stage.web.response.Response currentResponse = getCurrentResponse(request);
 
-      io.aboutcode.stage.web.web.response.Response response;
+      io.aboutcode.stage.web.response.Response response;
       try {
          response = requestHandler.process(request, currentResponse);
       }
@@ -121,9 +118,9 @@ final class SparkServer {
                             new FilterImpl(route.getPath(), "*/*") {
                                @Override
                                public void handle(Request rawRequest, Response rawResponse) {
-                                  io.aboutcode.stage.web.web.request.Request request = request(
+                                  io.aboutcode.stage.web.request.Request request = request(
                                       rawRequest);
-                                  io.aboutcode.stage.web.web.response.Response response =
+                                  io.aboutcode.stage.web.response.Response response =
                                       process(request,
                                               route.getRequestHandler());
 
@@ -138,11 +135,11 @@ final class SparkServer {
                            new RouteImpl(route.getPath(), "*/*") {
                               @Override
                               public Object handle(Request rawRequest, Response rawResponse) {
-                                 io.aboutcode.stage.web.web.request.Request request = request(
+                                 io.aboutcode.stage.web.request.Request request = request(
                                      rawRequest);
 
                                  // has the request been finished before? Then we do not process it
-                                 io.aboutcode.stage.web.web.response.Response response = getCurrentResponse(
+                                 io.aboutcode.stage.web.response.Response response = getCurrentResponse(
                                      request);
                                  if (!response.finished()) {
                                     // routes always finish a request
@@ -154,14 +151,14 @@ final class SparkServer {
    }
 
    private String apply(Response rawResponse,
-                        io.aboutcode.stage.web.web.request.Request request,
-                        io.aboutcode.stage.web.web.response.Response response,
+                        io.aboutcode.stage.web.request.Request request,
+                        io.aboutcode.stage.web.response.Response response,
                         boolean canFinish) {
       HttpServletResponse servletResponse = rawResponse.raw();
 
       // produce body
       String body = responseRenderer.render(request, response);
-      
+
       // add headers to spark response
       response
               .headers()
@@ -285,7 +282,7 @@ final class SparkServer {
       void process(Service service, Route route);
    }
 
-   private static class DefaultRequest implements io.aboutcode.stage.web.web.request.Request {
+   private static class DefaultRequest implements io.aboutcode.stage.web.request.Request {
       private final Request rawRequest;
 
       private DefaultRequest(Request rawRequest) {

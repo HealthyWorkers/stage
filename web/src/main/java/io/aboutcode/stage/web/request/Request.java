@@ -1,6 +1,6 @@
-package io.aboutcode.stage.web.web.request;
+package io.aboutcode.stage.web.request;
 
-import io.aboutcode.stage.web.web.Session;
+import io.aboutcode.stage.web.Session;
 
 import java.util.List;
 import java.util.Optional;

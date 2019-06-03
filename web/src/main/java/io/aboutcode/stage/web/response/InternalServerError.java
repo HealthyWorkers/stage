@@ -1,4 +1,4 @@
-package io.aboutcode.stage.web.web.response;
+package io.aboutcode.stage.web.response;
 
 /**
  * Default "Internal Server Error" response with a status of 501.

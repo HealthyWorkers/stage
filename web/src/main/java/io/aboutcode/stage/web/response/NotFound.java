@@ -1,4 +1,4 @@
-package io.aboutcode.stage.web.web.response;
+package io.aboutcode.stage.web.response;
 
 /**
  * "Resource not found" response with a status of 404.

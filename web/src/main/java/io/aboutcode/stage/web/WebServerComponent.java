@@ -4,8 +4,7 @@ import io.aboutcode.stage.component.BaseComponent;
 import io.aboutcode.stage.dependency.DependencyContext;
 import io.aboutcode.stage.dependency.DependencyException;
 import io.aboutcode.stage.lifecycle.LifeCycleException;
-import io.aboutcode.stage.web.web.WebEndpoint;
-import io.aboutcode.stage.web.web.response.renderer.ResponseRenderer;
+import io.aboutcode.stage.web.response.renderer.ResponseRenderer;
 import java.util.HashSet;
 import java.util.Set;
 

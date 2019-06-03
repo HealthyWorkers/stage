@@ -1,4 +1,4 @@
-package io.aboutcode.stage.web.web.response;
+package io.aboutcode.stage.web.response;
 
 /**
  * Default "OK" response with a status of 200 for a successful processing of a request.

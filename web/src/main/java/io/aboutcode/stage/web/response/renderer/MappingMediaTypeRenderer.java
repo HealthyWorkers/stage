@@ -1,8 +1,8 @@
-package io.aboutcode.stage.web.web.response.renderer;
+package io.aboutcode.stage.web.response.renderer;
 
 import com.google.common.net.MediaType;
-import io.aboutcode.stage.web.web.request.Request;
-import io.aboutcode.stage.web.web.response.Response;
+import io.aboutcode.stage.web.request.Request;
+import io.aboutcode.stage.web.response.Response;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

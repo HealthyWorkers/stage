@@ -1,11 +1,11 @@
-package io.aboutcode.stage.web.web.response.renderer;
+package io.aboutcode.stage.web.response.renderer;
 
 import com.google.common.net.MediaType;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.aboutcode.stage.web.web.request.Request;
-import io.aboutcode.stage.web.web.response.HttpHeader;
-import io.aboutcode.stage.web.web.response.Response;
+import io.aboutcode.stage.web.request.Request;
+import io.aboutcode.stage.web.response.HttpHeader;
+import io.aboutcode.stage.web.response.Response;
 
 /**
  * Default renderer for JSON responses.
