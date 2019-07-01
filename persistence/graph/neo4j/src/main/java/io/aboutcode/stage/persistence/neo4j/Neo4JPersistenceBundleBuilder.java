@@ -11,18 +11,19 @@ import io.aboutcode.stage.persistence.jdbc.JDBCDatabaseConfiguration;
 import io.aboutcode.stage.persistence.jdbc.JDBCPersistence;
 import io.aboutcode.stage.persistence.neo4j.bolt.BoltNeo4JDatabaseConfiguration;
 import io.aboutcode.stage.persistence.neo4j.bolt.BoltNeo4JPersistence;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Objects;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Config;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.jdbc.Neo4jDataSource;
+import org.neo4j.jdbc.bolt.BoltNeo4jDataSource;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Objects;
 
 /**
- * This adds a Neo4J persistence component to the application. The bundle will add the correct
- * parameters to the application to allow configuration of the datastore.
+ * This adds a Neo4J persistence component to the application. The bundle will add the correct parameters to the
+ * application to allow configuration of the datastore.
  */
 public final class Neo4JPersistenceBundleBuilder {
     private static final int DEFAULT_PORT = 7687;
@@ -53,9 +54,7 @@ public final class Neo4JPersistenceBundleBuilder {
     /**
      * Assigns the prefix that all configuration parameters will use. Defaults to an empty string.
      *
-     * @param configurationPrefix An identifier of this bundle; prefixes parameter names. <em>Omit
-     *                            trailing dashes</em>
-     *
+     * @param configurationPrefix An identifier of this bundle; prefixes parameter names. <em>Omit trailing dashes</em>
      * @return A new builder instance
      */
     public Neo4JPersistenceBundleBuilder withPrefix(String configurationPrefix) {
@@ -69,11 +68,9 @@ public final class Neo4JPersistenceBundleBuilder {
     /**
      * Assigns the identifier for the {@link Persistence} component. Defaults to null.
      *
-     * @param componentIdentifier An identifier for the {@link Persistence} component that will be
-     *                            added to the {@link ComponentContainer}. This can later be used to
-     *                            retrieve a specified {@link Persistence} component if multiple are
-     *                            added to the container
-     *
+     * @param componentIdentifier An identifier for the {@link Persistence} component that will be added to the {@link
+     *                            ComponentContainer}. This can later be used to retrieve a specified {@link
+     *                            Persistence} component if multiple are added to the container
      * @return A new builder instance
      */
     public Neo4JPersistenceBundleBuilder withIdentifier(Object componentIdentifier) {
@@ -85,14 +82,12 @@ public final class Neo4JPersistenceBundleBuilder {
     }
 
     /**
-     * Also adds a JDBC-wrapped connection to the Neo4J database to the application and assigns it
-     * the specified identifier.
+     * Also adds a JDBC-wrapped connection to the Neo4J database to the application and assigns it the specified
+     * identifier.
      *
-     * @param jdbcIdentifier The identifier for the {@link Persistence} component that will be added
-     *                       to the {@link ComponentContainer}. This can later be used to retrieve a
-     *                       specified {@link Persistence} component if multiple are added to the
-     *                       container. Must not be null.
-     *
+     * @param jdbcIdentifier The identifier for the {@link Persistence} component that will be added to the {@link
+     *                       ComponentContainer}. This can later be used to retrieve a specified {@link Persistence}
+     *                       component if multiple are added to the container. Must not be null.
      * @return A new builder instance
      */
     public Neo4JPersistenceBundleBuilder addJDBCWrapper(Object jdbcIdentifier) {
@@ -136,13 +131,9 @@ public final class Neo4JPersistenceBundleBuilder {
     }
 
     private class Neo4JDatabaseConfiguration implements JDBCDatabaseConfiguration,
-            BoltNeo4JDatabaseConfiguration {
+                                                        BoltNeo4JDatabaseConfiguration {
         @Parameter(name = "database-host", description = "The database server host name to connect to")
         private String host;
-        @Parameter(name = "database-port", description = "The port to which to connect on the database server", mandatory = false)
-        private Integer port = DEFAULT_PORT;
-        @Parameter(name = "database-name", description = "The name of the database (schema) to connect to")
-        private String database;
         @Parameter(name = "database-username", description = "The username to connect to the database with")
         private String username;
         @Parameter(name = "database-password", description = "The password to connect to the database with")
@@ -150,12 +141,8 @@ public final class Neo4JPersistenceBundleBuilder {
 
         @Override
         public HikariConfig apply(HikariConfig targetConfiguration) {
-            targetConfiguration.setDataSourceClassName(Neo4jDataSource.class.getName());
+            targetConfiguration.setDataSourceClassName(BoltNeo4jDataSource.class.getName());
             targetConfiguration.addDataSourceProperty("serverName", host);
-            if (port != null) {
-                targetConfiguration.addDataSourceProperty("port", port);
-            }
-            targetConfiguration.addDataSourceProperty("databaseName", database);
             targetConfiguration.addDataSourceProperty("user", username);
             targetConfiguration.addDataSourceProperty("password", password);
             return targetConfiguration;
@@ -171,7 +158,7 @@ public final class Neo4JPersistenceBundleBuilder {
                     .toConfig();
             URI uri;
             try {
-                uri = new URI("bolt", null, host, port, null, null, null);
+                uri = new URI("bolt", null, host, DEFAULT_PORT, null, null, null);
             } catch (URISyntaxException e) {
                 throw new IllegalArgumentException("Could not create connection url because: " +
                                                    e.getMessage(), e);
